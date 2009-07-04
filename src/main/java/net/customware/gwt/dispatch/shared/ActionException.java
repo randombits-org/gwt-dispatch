@@ -1,5 +1,7 @@
 package net.customware.gwt.dispatch.shared;
 
+import java.io.Serializable;
+
 import net.customware.gwt.dispatch.server.Dispatch;
 
 /**
@@ -8,7 +10,7 @@ import net.customware.gwt.dispatch.server.Dispatch;
  * 
  * @author David Peterson
  */
-public class ActionException extends Exception {
+public class ActionException extends Exception implements Serializable {
 
     public ActionException() {
     }

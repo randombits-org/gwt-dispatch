@@ -31,8 +31,32 @@
 		<url>http://code.google.com/p/gwt-dispatch/issues/list</url>
 	</issueManagement>
 
+	<properties>
+		<gwt.version>1.6.4</gwt.version>
+		<guice.version>2.0</guice.version>
+		<gin.version>1.0-20090622</gin.version>
+	</properties>
+
 	<dependencies>
 		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<version>${gwt.version}</version>
+			<scope>provided</scope>
+		</dependency>
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <version>${guice.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt.inject</groupId>
+      <artifactId>gin</artifactId>
+      <version>${gin.version}</version>
+    </dependency>
+    
+    <!-- Testing Dependencies -->
+    <dependency>
 			<groupId>org.jmock</groupId>
 			<artifactId>jmock-junit4</artifactId>
 			<version>2.4.0</version>

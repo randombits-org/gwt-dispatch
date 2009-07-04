@@ -3,7 +3,6 @@ package net.customware.gwt.dispatch.server;
 import net.customware.gwt.dispatch.shared.Action;
 import net.customware.gwt.dispatch.shared.ActionException;
 import net.customware.gwt.dispatch.shared.Result;
-import net.customware.my.shared.ServiceException;
 
 /**
  * ExecutionContext instances are passed to {@link ActionHandler}s, and allows
@@ -32,8 +31,7 @@ public interface ExecutionContext {
      * @throws ServiceException
      * @throws ActionException
      */
-    <A extends Action<R>, R extends Result> R execute( A action, boolean allowRollback ) throws ActionException,
-            ServiceException;
+    <A extends Action<R>, R extends Result> R execute( A action, boolean allowRollback ) throws ActionException;
 
     /**
      * Executes an action in the current context. If the surrounding execution
@@ -49,5 +47,5 @@ public interface ExecutionContext {
      * @throws ServiceException
      * @throws ActionException
      */
-    <A extends Action<R>, R extends Result> R execute( A action ) throws ActionException, ServiceException;
+    <A extends Action<R>, R extends Result> R execute( A action ) throws ActionException;
 }

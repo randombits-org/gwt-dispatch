@@ -1,6 +1,7 @@
 package net.customware.gwt.dispatch.server;
 
 import net.customware.gwt.dispatch.shared.Action;
+import net.customware.gwt.dispatch.shared.ActionException;
 import net.customware.gwt.dispatch.shared.Result;
 
 public interface Dispatch {
@@ -13,8 +14,8 @@ public interface Dispatch {
      * @param action
      *            The {@link Action}.
      * @return The action's result.
-     * @throws Exception
+     * @throws ActionException
      *             if the action execution failed.
      */
-    <A extends Action<R>, R extends Result> R execute( A action ) throws Exception;
+    <A extends Action<R>, R extends Result> R execute( A action ) throws ActionException;
 }
