@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.google.gwt.inject</groupId>
+  <artifactId>gin</artifactId>
+  <name>Google GIN</name>
+  <version>1.0-20090622</version>
+  <description>GIN (GWT INjection) is Guice for Google Web Toolkit client-side code</description>
+  <url>http://code.google.com/p/google-gin/</url>
+  
+  <dependencies>
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <version>2.0</version>
+    </dependency>
+  </dependencies>
+  
+</project>
