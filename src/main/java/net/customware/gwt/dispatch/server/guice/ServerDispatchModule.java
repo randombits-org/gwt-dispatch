@@ -1,50 +1,51 @@
 package net.customware.gwt.dispatch.server.guice;
 
-import net.customware.gwt.dispatch.server.ActionHandler;
 import net.customware.gwt.dispatch.server.ActionHandlerRegistry;
 import net.customware.gwt.dispatch.server.DefaultActionHandlerRegistry;
 import net.customware.gwt.dispatch.server.DefaultDispatch;
 import net.customware.gwt.dispatch.server.Dispatch;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Injector;
 import com.google.inject.Singleton;
-import com.google.inject.name.Names;
 
 /**
- * This is an abstract base class that configures Guice to inject
- * {@link Dispatch} and {@link ActionHandler} instances.
+ * This module will configure the implementation for the {@link Dispatch} and
+ * {@link ActionHandlerRegistry} interfaces. If you want to override the
+ * defaults ({@link DefaultDispatch} and {@link DefaultActionHandlerRegistry},
+ * respectively), pass the override values into the constructor for this module
+ * and ensure it is installed <b>before</b> any {@link ActionHandlerModule}
+ * instances.
  * 
- * <p>
- * Subclass this module to initialise the {@link Dispatch}, implement the
- * {@link #configureHandlers()} method and call {@link #bindHandler(Class)} to
- * register handler implementations. For example:
+ * @author David Peterson
  * 
- * <pre>
- * public class MyDispatchModule extends ClientDispatchModule {
- *      \@Override
- *      protected void configureHandlers() {
- *          bindHandler( MyHandler.class );
- *      }
- * }
- * </pre>
  */
-public abstract class ServerDispatchModule extends AbstractModule {
+public class ServerDispatchModule extends AbstractModule {
 
-    private static boolean configured = false;
+    private Class<? extends Dispatch> dispatchClass;
+
+    private Class<? extends ActionHandlerRegistry> actionHandlerRegistryClass;
+
+    public ServerDispatchModule() {
+        this( DefaultDispatch.class, DefaultActionHandlerRegistry.class );
+    }
+
+    public ServerDispatchModule( Class<? extends Dispatch> dispatchClass ) {
+        this( dispatchClass, DefaultActionHandlerRegistry.class );
+    }
+
+    public ServerDispatchModule( Class<? extends Dispatch> dispatchClass,
+            Class<? extends ActionHandlerRegistry> actionHandlerRegistryClass ) {
+        this.dispatchClass = dispatchClass;
+        this.actionHandlerRegistryClass = actionHandlerRegistryClass;
+    }
 
     @Override
-    protected void configure() {
-        // Note: This assumes that all modules will only be configured in one
-        // injector tree, and that it all happens in a single thread.
-        if ( !configured ) {
-            bind( ActionHandlerRegistry.class ).to( getActionHandlerRegistryClass() ).in( Singleton.class );
-            bind( Dispatch.class ).to( getDispatchClass() );
-            // This will bind registered handlers to the registry.
-            requestStaticInjection( ActionHandlerLinker.class );
-            configured = true;
-        }
-
-        configureHandlers();
+    protected final void configure() {
+        bind( ActionHandlerRegistry.class ).to( getActionHandlerRegistryClass() ).in( Singleton.class );
+        bind( Dispatch.class ).to( getDispatchClass() );
+        // This will bind registered handlers to the registry.
+        requestStaticInjection( ActionHandlerLinker.class );
     }
 
     /**
@@ -55,7 +56,7 @@ public abstract class ServerDispatchModule extends AbstractModule {
      * @return The {@link Dispatch} implementation class.
      */
     protected Class<? extends Dispatch> getDispatchClass() {
-        return DefaultDispatch.class;
+        return dispatchClass;
     }
 
     /**
@@ -67,15 +68,25 @@ public abstract class ServerDispatchModule extends AbstractModule {
      * @return The {@link ActionHandlerRegistry} implementation class.
      */
     protected Class<? extends ActionHandlerRegistry> getActionHandlerRegistryClass() {
-        return DefaultActionHandlerRegistry.class;
+        return actionHandlerRegistryClass;
     }
 
-    protected abstract void configureHandlers();
+    /**
+     * Override so that only one instance of this class will ever be installed
+     * in an {@link Injector}.
+     */
+    @Override
+    public boolean equals( Object obj ) {
+        return obj instanceof ServerDispatchModule;
+    }
 
-    protected void bindHandler( Class<? extends ActionHandler<?, ?>> handlerClass ) {
-        bind( ActionHandler.class ).annotatedWith( Names.named( handlerClass.getName() ) ).to( handlerClass ).in(
-                Singleton.class );
-
+    /**
+     * Override so that only one instance of this class will ever be installed
+     * in an {@link Injector}.
+     */
+    @Override
+    public int hashCode() {
+        return ServerDispatchModule.class.hashCode();
     }
 
 }

@@ -13,7 +13,7 @@ public class UnsupportedActionException extends ActionException {
     }
 
     public UnsupportedActionException( Class<? extends Action<? extends Result>> actionClass ) {
-        super( actionClass.getName() );
+        super( "No handler is registered for " + actionClass.getName() );
     }
 
 }
