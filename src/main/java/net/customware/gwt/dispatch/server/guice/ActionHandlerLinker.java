@@ -17,14 +17,14 @@ import com.google.inject.TypeLiteral;
  * @author David Peterson
  * 
  */
-public class ActionHandlerLinker {
+public final class ActionHandlerLinker {
 
-    public ActionHandlerLinker() {
+    private ActionHandlerLinker() {
     }
 
     @Inject
     @SuppressWarnings("unchecked")
-    public void link( Injector injector, ActionHandlerRegistry actionHandlerRegistry ) {
+    public static void linkHandlers( Injector injector, ActionHandlerRegistry actionHandlerRegistry ) {
         List<Binding<ActionHandler>> bindings = injector
                 .findBindingsByType( TypeLiteral.get( ActionHandler.class ) );
 
