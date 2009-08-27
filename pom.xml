@@ -3,7 +3,7 @@
 	<groupId>net.customware.gwt.dispatch</groupId>
 	<artifactId>gwt-dispatch</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>GWT Dispatch</name>
 	<url>http://code.google.com/p/gwt-dispatch</url>
 
@@ -70,9 +70,9 @@
 	</dependencies>
 
 	<scm>
-		<connection>scm:svn:http://gwt-dispatch.googlecode.com/svn/tags/gwt-dispatch-1.0.0</connection>
-		<developerConnection>scm:svn:https://gwt-dispatch.googlecode.com/svn/tags/gwt-dispatch-1.0.0</developerConnection>
-		<url>http://gwt-dispatch.googlecode.com/svn/tags/gwt-dispatch-1.0.0</url>
+		<connection>scm:svn:http://gwt-dispatch.googlecode.com/svn/trunk/</connection>
+		<developerConnection>scm:svn:https://gwt-dispatch.googlecode.com/svn/trunk/</developerConnection>
+		<url>http://gwt-dispatch.googlecode.com/svn/trunk/</url>
 	</scm>
 
 	<build>
