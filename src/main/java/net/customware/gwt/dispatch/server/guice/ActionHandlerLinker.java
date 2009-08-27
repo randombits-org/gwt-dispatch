@@ -4,6 +4,8 @@ import java.util.List;
 
 import net.customware.gwt.dispatch.server.ActionHandler;
 import net.customware.gwt.dispatch.server.ActionHandlerRegistry;
+import net.customware.gwt.dispatch.server.ClassActionHandlerRegistry;
+import net.customware.gwt.dispatch.server.InstanceActionHandlerRegistry;
 
 import com.google.inject.Binding;
 import com.google.inject.Inject;
@@ -24,12 +26,27 @@ public final class ActionHandlerLinker {
 
     @Inject
     @SuppressWarnings("unchecked")
-    public static void linkHandlers( Injector injector, ActionHandlerRegistry actionHandlerRegistry ) {
-        List<Binding<ActionHandler>> bindings = injector
-                .findBindingsByType( TypeLiteral.get( ActionHandler.class ) );
+    public static void linkHandlers( Injector injector, ActionHandlerRegistry registry ) {
+        List<Binding<ActionHandlerMap>> bindings = injector.findBindingsByType( TypeLiteral
+                .get( ActionHandlerMap.class ) );
 
-        for ( Binding<ActionHandler> binding : bindings ) {
-            actionHandlerRegistry.addHandler( binding.getProvider().get() );
+        if ( registry instanceof InstanceActionHandlerRegistry ) {
+            InstanceActionHandlerRegistry instanceRegistry = ( InstanceActionHandlerRegistry ) registry;
+
+            for ( Binding<ActionHandlerMap> binding : bindings ) {
+                Class<? extends ActionHandler<?, ?>> handlerClass = binding.getProvider().get()
+                        .getActionHandlerClass();
+                ActionHandler<?, ?> handler = injector.getInstance( handlerClass );
+                instanceRegistry.addHandler( handler );
+            }
+        } else if ( registry instanceof ClassActionHandlerRegistry ) {
+            ClassActionHandlerRegistry classRegistry = ( ClassActionHandlerRegistry ) registry;
+
+            for ( Binding<ActionHandlerMap> binding : bindings ) {
+                ActionHandlerMap map = binding.getProvider().get();
+                classRegistry.addHandlerClass( map.getActionClass(), map.getActionHandlerClass() );
+            }
         }
+
     }
 }

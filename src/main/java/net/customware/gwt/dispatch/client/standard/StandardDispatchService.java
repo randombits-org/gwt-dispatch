@@ -1,4 +1,4 @@
-package net.customware.gwt.dispatch.client.service;
+package net.customware.gwt.dispatch.client.standard;
 
 import net.customware.gwt.dispatch.client.DispatchAsync;
 import net.customware.gwt.dispatch.server.Dispatch;
@@ -21,6 +21,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  * @author David Peterson
  */
 @RemoteServiceRelativePath("dispatch")
-public interface DispatchService extends RemoteService {
+public interface StandardDispatchService extends RemoteService {
     Result execute( Action<?> action ) throws Exception;
 }

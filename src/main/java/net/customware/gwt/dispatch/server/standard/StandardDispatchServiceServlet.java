@@ -1,6 +1,6 @@
-package net.customware.gwt.dispatch.server.service;
+package net.customware.gwt.dispatch.server.standard;
 
-import net.customware.gwt.dispatch.client.service.DispatchService;
+import net.customware.gwt.dispatch.client.standard.StandardDispatchService;
 import net.customware.gwt.dispatch.server.Dispatch;
 import net.customware.gwt.dispatch.shared.Action;
 import net.customware.gwt.dispatch.shared.ActionException;
@@ -11,11 +11,11 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-public class DispatchServiceServlet extends RemoteServiceServlet implements DispatchService {
+public class StandardDispatchServiceServlet extends RemoteServiceServlet implements StandardDispatchService {
     private final Dispatch dispatch;
 
     @Inject
-    public DispatchServiceServlet( Dispatch dispatch ) {
+    public StandardDispatchServiceServlet( Dispatch dispatch ) {
         this.dispatch = dispatch;
     }
 

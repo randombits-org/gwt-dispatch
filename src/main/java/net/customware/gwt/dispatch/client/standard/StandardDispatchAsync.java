@@ -1,7 +1,6 @@
-package net.customware.gwt.dispatch.client;
+package net.customware.gwt.dispatch.client.standard;
 
-import net.customware.gwt.dispatch.client.service.DispatchService;
-import net.customware.gwt.dispatch.client.service.DispatchServiceAsync;
+import net.customware.gwt.dispatch.client.DispatchAsync;
 import net.customware.gwt.dispatch.server.Dispatch;
 import net.customware.gwt.dispatch.shared.Action;
 import net.customware.gwt.dispatch.shared.Result;
@@ -16,11 +15,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * 
  * @author David Peterson
  */
-public class DefaultDispatchAsync implements DispatchAsync {
+public class StandardDispatchAsync implements DispatchAsync {
 
-    private static final DispatchServiceAsync realService = GWT.create( DispatchService.class );
+    private static final StandardDispatchServiceAsync realService = GWT.create( StandardDispatchService.class );
 
-    public DefaultDispatchAsync() {
+    public StandardDispatchAsync() {
     }
 
     public <A extends Action<R>, R extends Result> void execute( final A action, final AsyncCallback<R> callback ) {

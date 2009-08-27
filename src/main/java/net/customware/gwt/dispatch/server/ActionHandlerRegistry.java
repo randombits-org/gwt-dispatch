@@ -4,23 +4,6 @@ import net.customware.gwt.dispatch.shared.Action;
 import net.customware.gwt.dispatch.shared.Result;
 
 public interface ActionHandlerRegistry {
-    /**
-     * Adds the specified {@link ActionHandler} to the registry.
-     * 
-     * @param handler
-     *            The handler.
-     */
-    void addHandler( ActionHandler<?, ?> handler );
-
-    /**
-     * Removes the specified handler.
-     * 
-     * @param handler
-     *            The handler.
-     * @return <code>true</code> if the handler was previously registered and
-     *         was successfully removed.
-     */
-    boolean removeHandler( ActionHandler<?, ?> handler );
 
     /**
      * Searches the registry and returns the first handler which supports the

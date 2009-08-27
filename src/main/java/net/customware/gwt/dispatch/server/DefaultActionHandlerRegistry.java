@@ -8,7 +8,7 @@ import net.customware.gwt.dispatch.shared.Result;
 import com.google.inject.Singleton;
 
 @Singleton
-public class DefaultActionHandlerRegistry implements ActionHandlerRegistry {
+public class DefaultActionHandlerRegistry implements InstanceActionHandlerRegistry {
 
     private final Map<Class<? extends Action<?>>, ActionHandler<?, ?>> handlers;
 
