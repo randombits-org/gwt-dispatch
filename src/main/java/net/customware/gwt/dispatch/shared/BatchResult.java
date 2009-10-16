@@ -17,8 +17,20 @@ import net.customware.gwt.dispatch.shared.BatchAction.OnException;
  * @author David Peterson
  */
 public class BatchResult implements Result {
-    private final List<Result> results;
+    private List<Result> results;
 
+    /**
+     * For serialization.
+     */
+    BatchResult() {
+    }
+
+    /**
+     * Creates a new result with the list of results from the batch action, in
+     * order.
+     * 
+     * @param results
+     */
     public BatchResult( List<Result> results ) {
         this.results = results;
     }

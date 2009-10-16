@@ -23,10 +23,26 @@ public class BatchAction implements Action<BatchResult> {
         ROLLBACK;
     }
 
-    private final OnException onException;
+    private OnException onException;
 
-    private final Action<?>[] actions;
+    private Action<?>[] actions;
 
+    /**
+     * Used for serialization only.
+     */
+    BatchAction() {
+    }
+
+    /**
+     * Constructs a new batch action, which will attempt to execute the provided
+     * list of actions in order. If there is a failure, it will follow the rules
+     * specified by <code>onException</code>.
+     * 
+     * @param onException
+     *            If there is an exception, specify the behaviour.
+     * @param actions
+     *            The list of actions to execute.
+     */
     public BatchAction( OnException onException, Action<?>... actions ) {
         this.onException = onException;
         this.actions = actions;
