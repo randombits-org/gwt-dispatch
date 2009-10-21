@@ -7,16 +7,14 @@ import net.customware.gwt.dispatch.shared.ActionException;
 import net.customware.gwt.dispatch.shared.Result;
 import net.customware.gwt.dispatch.shared.UnsupportedActionException;
 
-import com.google.inject.Inject;
-
-public class DefaultDispatch implements Dispatch {
+public abstract class AbstractDispatch implements Dispatch {
 
     private static class DefaultExecutionContext implements ExecutionContext {
-        private final DefaultDispatch dispatch;
+        private final AbstractDispatch dispatch;
 
         private final List<ActionResult<?, ?>> actionResults;
 
-        private DefaultExecutionContext( DefaultDispatch dispatch ) {
+        private DefaultExecutionContext( AbstractDispatch dispatch ) {
             this.dispatch = dispatch;
             this.actionResults = new java.util.ArrayList<ActionResult<?, ?>>();
         }
@@ -55,13 +53,6 @@ public class DefaultDispatch implements Dispatch {
 
     };
 
-    private final ActionHandlerRegistry handlerRegistry;
-
-    @Inject
-    public DefaultDispatch( ActionHandlerRegistry handlerRegistry ) {
-        this.handlerRegistry = handlerRegistry;
-    }
-
     public <A extends Action<R>, R extends Result> R execute( A action ) throws ActionException {
         DefaultExecutionContext ctx = new DefaultExecutionContext( this );
         try {
@@ -80,12 +71,14 @@ public class DefaultDispatch implements Dispatch {
 
     private <A extends Action<R>, R extends Result> ActionHandler<A, R> findHandler( A action )
             throws UnsupportedActionException {
-        ActionHandler<A, R> handler = handlerRegistry.findHandler( action );
+        ActionHandler<A, R> handler = getHandlerRegistry().findHandler( action );
         if ( handler == null )
             throw new UnsupportedActionException( action );
 
         return handler;
     }
+
+    protected abstract ActionHandlerRegistry getHandlerRegistry();
 
     private <A extends Action<R>, R extends Result> void doRollback( A action, R result, ExecutionContext ctx )
             throws ActionException {

@@ -5,8 +5,6 @@ import java.util.Map;
 import net.customware.gwt.dispatch.shared.Action;
 import net.customware.gwt.dispatch.shared.Result;
 
-import com.google.inject.Singleton;
-
 /**
  * This is a lazy-loading implementation of the registry. It will only create
  * action handlers when they are first used. All {@link ActionHandler}
@@ -14,7 +12,6 @@ import com.google.inject.Singleton;
  * 
  * @author David Peterson
  */
-@Singleton
 public class LazyActionHandlerRegistry implements ClassActionHandlerRegistry {
 
     private final Map<Class<? extends Action<?>>, Class<? extends ActionHandler<?, ?>>> handlerClasses;

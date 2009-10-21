@@ -1,8 +1,10 @@
 package net.customware.gwt.dispatch.server.secure;
 
+import net.customware.gwt.dispatch.server.guice.GuiceSecureDispatchServlet;
+
 /**
  * Implementors must provide an implementation of this interface and provide it
- * to {@link SecureDispatchServiceServlet} so that it can check for valid
+ * to {@link GuiceSecureDispatchServlet} so that it can check for valid
  * session ids.
  * 
  * @author David Peterson
