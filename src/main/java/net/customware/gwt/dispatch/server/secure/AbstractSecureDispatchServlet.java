@@ -12,7 +12,7 @@ public abstract class AbstractSecureDispatchServlet extends RemoteServiceServlet
 
     public Result execute( String sessionId, Action<?> action ) throws Exception {
         try {
-            if ( getSessionValidator().getSessionDetails( sessionId ) != null ) {
+            if ( getSessionValidator().isValid( sessionId, getThreadLocalRequest() ) ) {
                 return getDispatch().execute( action );
             } else {
                 throw new InvalidSessionException();

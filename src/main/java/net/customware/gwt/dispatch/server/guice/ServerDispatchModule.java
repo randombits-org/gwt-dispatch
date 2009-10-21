@@ -1,8 +1,8 @@
 package net.customware.gwt.dispatch.server.guice;
 
+import net.customware.gwt.dispatch.server.AbstractDispatch;
 import net.customware.gwt.dispatch.server.ActionHandlerRegistry;
 import net.customware.gwt.dispatch.server.DefaultActionHandlerRegistry;
-import net.customware.gwt.dispatch.server.AbstractDispatch;
 import net.customware.gwt.dispatch.server.Dispatch;
 import net.customware.gwt.dispatch.server.InstanceActionHandlerRegistry;
 
@@ -45,6 +45,7 @@ public class ServerDispatchModule extends AbstractModule {
     protected final void configure() {
         bind( ActionHandlerRegistry.class ).to( getActionHandlerRegistryClass() ).in( Singleton.class );
         bind( Dispatch.class ).to( getDispatchClass() );
+
         // This will bind registered handlers to the registry.
         if ( InstanceActionHandlerRegistry.class.isAssignableFrom( getActionHandlerRegistryClass() ) )
             requestStaticInjection( ActionHandlerLinker.class );

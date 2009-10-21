@@ -21,25 +21,25 @@ public class SecureDispatchAsync implements DispatchAsync {
 
     private static final SecureDispatchServiceAsync realService = GWT.create( SecureDispatchService.class );
 
-    public SecureDispatchAsync() {
+    private final SecureSessionAccessor secureSessionAccessor;
+
+    public SecureDispatchAsync( SecureSessionAccessor secureSessionAccessor ) {
+        this.secureSessionAccessor = secureSessionAccessor;
     }
 
     public <A extends Action<R>, R extends Result> void execute( final A action, final AsyncCallback<R> callback ) {
 
-        String sessionId = SecureSessionUtil.getSessionId();
+        String sessionId = secureSessionAccessor.getSessionId();
 
         realService.execute( sessionId, action, new AsyncCallback<Result>() {
             public void onFailure( Throwable caught ) {
                 if ( caught instanceof InvalidSessionException ) {
-                    SecureSessionUtil.clearSessionId();
+                    secureSessionAccessor.clearSessionId();
                 }
                 callback.onFailure( caught );
             }
 
             public void onSuccess( Result result ) {
-                if ( result instanceof SecureSessionResult ) {
-                    SecureSessionUtil.setSessionId( ( ( SecureSessionResult ) result ).getSessionId() );
-                }
                 callback.onSuccess( ( R ) result );
             }
         } );
