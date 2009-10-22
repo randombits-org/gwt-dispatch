@@ -8,6 +8,13 @@ import net.customware.gwt.dispatch.server.secure.SecureSessionValidator;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserServiceFactory;
 
+/**
+ * Validates the client session id with the provided request.
+ * 
+ * @author David Peterson
+ * @author David Chandler
+ * 
+ */
 public class AppEngineSecureSessionValidator implements SecureSessionValidator {
 
     public AppEngineSecureSessionValidator() {

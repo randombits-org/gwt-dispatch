@@ -11,7 +11,7 @@ import com.google.inject.AbstractModule;
  * 
  * @author David Peterson
  */
-public class AppEngineModule extends AbstractModule {
+public class AppEngineSecurityModule extends AbstractModule {
 
     @Override
     protected void configure() {
