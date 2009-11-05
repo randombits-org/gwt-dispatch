@@ -1,13 +1,12 @@
 package net.customware.gwt.dispatch.server.guice;
 
+import com.google.inject.AbstractModule;
+import com.google.inject.internal.UniqueAnnotations;
 import net.customware.gwt.dispatch.server.ActionHandler;
 import net.customware.gwt.dispatch.server.ActionHandlerRegistry;
 import net.customware.gwt.dispatch.server.Dispatch;
 import net.customware.gwt.dispatch.shared.Action;
 import net.customware.gwt.dispatch.shared.Result;
-
-import com.google.inject.AbstractModule;
-import com.google.inject.internal.UniqueAnnotations;
 
 /**
  * This is an abstract base class that configures Guice to inject
@@ -15,11 +14,11 @@ import com.google.inject.internal.UniqueAnnotations;
  * instance of {@link ServerDispatchModule} has been installed, the standard
  * {@link Dispatch} and {@link ActionHandlerRegistry} classes will be
  * configured.
- * 
- * <p>
+ * <p/>
+ * <p/>
  * Implement the {@link #configureHandlers()} method and call
- * {@link #bindHandler(Class)} to register handler implementations. For example:
- * 
+ * {@link #bindHandler(Class, Class)} to register handler implementations. For example:
+ * <p/>
  * <pre>
  * public class MyDispatchModule extends ClientDispatchModule {
  *      \@Override
@@ -32,7 +31,7 @@ import com.google.inject.internal.UniqueAnnotations;
 public abstract class ActionHandlerModule extends AbstractModule {
 
     private static class ActionHandlerMapImpl<A extends Action<R>, R extends Result> implements
-            ActionHandlerMap<A, R> {
+        ActionHandlerMap<A, R> {
 
         private final Class<A> actionClass;
 
@@ -69,13 +68,14 @@ public abstract class ActionHandlerModule extends AbstractModule {
     /**
      * Call this method to binds the specified {@link ActionHandler} instance
      * class.
-     * 
-     * @param handlerClass
+     *
+     * @param actionClass  The action class.
+     * @param handlerClass The handler class.
      */
     protected <A extends Action<R>, R extends Result> void bindHandler( Class<A> actionClass,
-            Class<? extends ActionHandler<A, R>> handlerClass ) {
+                                                                        Class<? extends ActionHandler<A, R>> handlerClass ) {
         bind( ActionHandlerMap.class ).annotatedWith( UniqueAnnotations.create() ).toInstance(
-                new ActionHandlerMapImpl<A, R>( actionClass, handlerClass ) );
+            new ActionHandlerMapImpl<A, R>( actionClass, handlerClass ) );
     }
 
 }
