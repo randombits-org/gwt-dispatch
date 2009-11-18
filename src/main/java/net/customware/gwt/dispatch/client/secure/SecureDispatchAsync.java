@@ -2,7 +2,9 @@ package net.customware.gwt.dispatch.client.secure;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import net.customware.gwt.dispatch.client.AbstractDispatchAsync;
 import net.customware.gwt.dispatch.client.DispatchAsync;
+import net.customware.gwt.dispatch.client.ExceptionHandler;
 import net.customware.gwt.dispatch.server.Dispatch;
 import net.customware.gwt.dispatch.shared.Action;
 import net.customware.gwt.dispatch.shared.Result;
@@ -15,13 +17,14 @@ import net.customware.gwt.dispatch.shared.secure.InvalidSessionException;
  *
  * @author David Peterson
  */
-public class SecureDispatchAsync implements DispatchAsync {
+public class SecureDispatchAsync extends AbstractDispatchAsync {
 
     private static final SecureDispatchServiceAsync realService = GWT.create( SecureDispatchService.class );
 
     private final SecureSessionAccessor secureSessionAccessor;
 
-    public SecureDispatchAsync( SecureSessionAccessor secureSessionAccessor ) {
+    public SecureDispatchAsync( ExceptionHandler exceptionHandler, SecureSessionAccessor secureSessionAccessor ) {
+        super( exceptionHandler );
         this.secureSessionAccessor = secureSessionAccessor;
     }
 
@@ -34,6 +37,7 @@ public class SecureDispatchAsync implements DispatchAsync {
                 SecureDispatchAsync.this.onFailure( action, caught, callback );
             }
 
+            @SuppressWarnings({"unchecked"})
             public void onSuccess( Result result ) {
                 // Note: This cast is a dodgy hack to get around a GWT 1.6 async compiler issue
                 SecureDispatchAsync.this.onSuccess( action, (R) result, callback );
@@ -45,11 +49,8 @@ public class SecureDispatchAsync implements DispatchAsync {
         if ( caught instanceof InvalidSessionException ) {
             secureSessionAccessor.clearSessionId();
         }
-        callback.onFailure( caught );
-    }
 
-    protected <A extends Action<R>, R extends Result> void onSuccess( A action, R result, final AsyncCallback<R> callback ) {
-        callback.onSuccess( result );
-    }
+        super.onFailure( action, caught, callback );
 
+    }
 }

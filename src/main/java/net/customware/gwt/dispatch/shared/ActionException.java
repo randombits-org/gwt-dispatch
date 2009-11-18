@@ -1,8 +1,8 @@
 package net.customware.gwt.dispatch.shared;
 
-import java.io.Serializable;
-
 import net.customware.gwt.dispatch.server.Dispatch;
+
+import java.io.Serializable;
 
 /**
  * These are thrown by {@link Dispatch#execute(Action)} if there is a
@@ -20,11 +20,11 @@ public class ActionException extends Exception implements Serializable {
     }
 
     public ActionException( Throwable cause ) {
-        super( cause.getMessage(), cause );
+        super( cause.getMessage() );
     }
 
     public ActionException( String message, Throwable cause ) {
-        super( message, cause );
+        super( message + " (" + cause.getMessage() + ")" );
     }
 
 }

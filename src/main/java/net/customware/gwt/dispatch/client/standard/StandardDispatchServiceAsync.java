@@ -8,7 +8,10 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public interface StandardDispatchServiceAsync {
 
     /**
-     * GWT-RPC service asynchronous (client-side) interface
+     * Executes the specified action.
+     * 
+     * @param action The action to execute.
+     * @param callback The callback to execute once the action completes.
      * 
      * @see net.customware.gwt.dispatch.server.Dispatch
      */

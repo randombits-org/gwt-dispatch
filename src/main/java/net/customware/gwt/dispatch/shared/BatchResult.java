@@ -1,8 +1,8 @@
 package net.customware.gwt.dispatch.shared;
 
-import java.util.List;
-
 import net.customware.gwt.dispatch.shared.BatchAction.OnException;
+
+import java.util.List;
 
 /**
  * Contains the list of {@link Result}s from successful actions in the
@@ -29,7 +29,7 @@ public class BatchResult implements Result {
      * Creates a new result with the list of results from the batch action, in
      * order.
      * 
-     * @param results
+     * @param results The list of results.
      */
     public BatchResult( List<Result> results ) {
         this.results = results;

@@ -8,6 +8,7 @@ public class UnsupportedActionException extends ActionException {
     UnsupportedActionException() {
     }
     
+    @SuppressWarnings({"unchecked"})
     public UnsupportedActionException( Action<? extends Result> action ) {
         this( ( Class<? extends Action<? extends Result>> ) action.getClass() );
     }

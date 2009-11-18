@@ -1,21 +1,14 @@
 package net.customware.gwt.dispatch.shared.secure;
 
-public class InvalidSessionException extends Exception {
+import net.customware.gwt.dispatch.shared.ServiceException;
+
+public class InvalidSessionException extends ServiceException {
 
     public InvalidSessionException() {
         super();
     }
 
-    public InvalidSessionException( String message, Throwable cause ) {
-        super( message, cause );
-    }
-
     public InvalidSessionException( String message ) {
         super( message );
     }
-
-    public InvalidSessionException( Throwable cause ) {
-        super( cause );
-    }
-
 }
