@@ -100,9 +100,9 @@
     </dependencies>
 
     <scm>
-        <connection>scm:svn:http://gwt-dispatch.googlecode.com/svn/trunk/</connection>
-        <developerConnection>scm:svn:https://gwt-dispatch.googlecode.com/svn/trunk/</developerConnection>
-        <url>http://gwt-dispatch.googlecode.com/svn/trunk/</url>
+        <connection>scm:hg:http://gwt-dispatch.googlecode.com/hg</connection>
+        <developerConnection>scm:hg:https://gwt-dispatch.googlecode.com/hg</developerConnection>
+        <url>http://gwt-dispatch.googlecode.com/hg</url>
     </scm>
 
     <build>
