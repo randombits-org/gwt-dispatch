@@ -31,6 +31,13 @@
         <url>http://code.google.com/p/gwt-dispatch/issues/list</url>
     </issueManagement>
 
+    <licenses>
+        <license>
+            <name>New BSD License</name>
+            <url>http://www.opensource.org/licenses/bsd-license.php</url>
+        </license>
+    </licenses>
+
     <properties>
         <gwt.version>1.7.1</gwt.version>
         <guice.version>2.0</guice.version>
