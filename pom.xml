@@ -146,15 +146,15 @@
     </build>
 
     <distributionManagement>
-        <repository>
-            <id>google-code</id>
-            <name>GWT Dispatch SVN Repository</name>
-            <url>svn:https://gwt-dispatch.googlecode.com/svn/maven2</url>
-        </repository>
+	<repository>
+	    <id>sonatype-nexus-staging</id>
+	    <name>Nexus Release Repository</name>
+	    <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+	</repository>
         <snapshotRepository>
-            <id>google-code</id>
-            <name>GWT Dispatch SVN Repository</name>
-            <url>svn:https://gwt-dispatch.googlecode.com/svn/maven2</url>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>http://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 </project>
