@@ -37,7 +37,8 @@ public class AppEngineSecureSessionValidator implements SecureSessionValidator {
             }
             // Skip check on localhost so we can test in AppEngine
             // local dev env
-            if ( ( "localhost".equals( serverName ) ) || ( sessionId.equals( clientSessionId ) ) ) {
+            if ( ( "localhost".equals( serverName ) ) || ( "127.0.0.1".equals( serverName ) )
+                    || ( sessionId.equals( clientSessionId ) ) ) {
                 return true;
             }
         }
