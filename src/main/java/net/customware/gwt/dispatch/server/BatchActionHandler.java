@@ -25,6 +25,7 @@ public class BatchActionHandler extends AbstractActionHandler<BatchAction, Batch
     public BatchResult execute( BatchAction action, ExecutionContext context ) throws ActionException {
         OnException onException = action.getOnException();
         List<Result> results = new java.util.ArrayList<Result>();
+        List<Exception> exceptions = new java.util.ArrayList<Exception>();
         for ( Action<?> a : action.getActions() ) {
             Result result = null;
             try {
@@ -37,12 +38,14 @@ public class BatchActionHandler extends AbstractActionHandler<BatchAction, Batch
                         throw ( RuntimeException ) e;
                     else
                         throw new ActionException( e );
+                } else {
+                    exceptions.set( results.size(), e );
                 }
             }
             results.add( result );
         }
 
-        return new BatchResult( results );
+        return new BatchResult( results, exceptions );
     }
 
     public void rollback( BatchAction action, BatchResult result, ExecutionContext context )
