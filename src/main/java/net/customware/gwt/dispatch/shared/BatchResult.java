@@ -25,7 +25,7 @@ import java.util.List;
 public class BatchResult implements Result, Iterable<Result> {
     private List<Result> results;
     
-    private List<Exception> exceptions;
+    private List<Throwable> exceptions;
 
     /**
      * For serialization.
@@ -40,7 +40,7 @@ public class BatchResult implements Result, Iterable<Result> {
      * @param results
      *            The list of results.
      */
-    public BatchResult( List<Result> results, List<Exception> exceptions ) {
+    public BatchResult( List<Result> results, List<Throwable> exceptions ) {
         this.results = results;
         this.exceptions = exceptions;
     }
@@ -58,7 +58,7 @@ public class BatchResult implements Result, Iterable<Result> {
      * The list of exceptions, matched to the result number.
      * @return
      */
-    public List<Exception> getExceptions() {
+    public List<Throwable> getExceptions() {
         return exceptions;
     }
 
@@ -96,7 +96,7 @@ public class BatchResult implements Result, Iterable<Result> {
         return null;
     }
     
-    public Exception getException( int index ) {
+    public Throwable getException( int index ) {
         return exceptions.get( index );
     }
 
