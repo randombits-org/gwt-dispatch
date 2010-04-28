@@ -1,12 +1,12 @@
 package net.customware.gwt.dispatch.server.guice;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Injector;
-import com.google.inject.Singleton;
 import net.customware.gwt.dispatch.server.ActionHandlerRegistry;
 import net.customware.gwt.dispatch.server.DefaultActionHandlerRegistry;
 import net.customware.gwt.dispatch.server.Dispatch;
-import net.customware.gwt.dispatch.server.InstanceActionHandlerRegistry;
+
+import com.google.inject.AbstractModule;
+import com.google.inject.Injector;
+import com.google.inject.Singleton;
 
 /**
  * This module will configure the implementation for the {@link Dispatch} and
@@ -39,13 +39,12 @@ public class ServerDispatchModule extends AbstractModule {
     }
 
     @Override
-    protected final void configure() {
+    protected void configure() {
         bind( ActionHandlerRegistry.class ).to( getActionHandlerRegistryClass() ).in( Singleton.class );
         bind( Dispatch.class ).to( getDispatchClass() );
 
         // This will bind registered handlers to the registry.
-        if ( InstanceActionHandlerRegistry.class.isAssignableFrom( getActionHandlerRegistryClass() ) )
-            requestStaticInjection( ActionHandlerLinker.class );
+        requestStaticInjection( ActionHandlerLinker.class );
     }
 
     /**
