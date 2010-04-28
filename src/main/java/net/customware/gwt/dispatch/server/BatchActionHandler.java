@@ -25,7 +25,7 @@ public class BatchActionHandler extends AbstractActionHandler<BatchAction, Batch
     public BatchResult execute( BatchAction action, ExecutionContext context ) throws ActionException {
         OnException onException = action.getOnException();
         List<Result> results = new java.util.ArrayList<Result>();
-        List<Exception> exceptions = new java.util.ArrayList<Exception>();
+        List<Throwable> exceptions = new java.util.ArrayList<Throwable>();
         for ( Action<?> a : action.getActions() ) {
             Result result = null;
             try {
