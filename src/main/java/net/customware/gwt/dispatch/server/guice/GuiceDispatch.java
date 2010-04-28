@@ -1,24 +1,21 @@
 package net.customware.gwt.dispatch.server.guice;
 
+import net.customware.gwt.dispatch.server.ActionHandlerRegistry;
+import net.customware.gwt.dispatch.server.SimpleDispatch;
+
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import net.customware.gwt.dispatch.server.AbstractDispatch;
-import net.customware.gwt.dispatch.server.ActionHandlerRegistry;
-
+/**
+ * A simple extension of {@link SimpleDispatch} with Guice annotations.
+ * 
+ * @author David Peterson
+ */
 @Singleton
-public class GuiceDispatch extends AbstractDispatch {
-
-    private final ActionHandlerRegistry handlerRegistry;
+public class GuiceDispatch extends SimpleDispatch {
 
     @Inject
     public GuiceDispatch( ActionHandlerRegistry handlerRegistry ) {
-        this.handlerRegistry = handlerRegistry;
+        super( handlerRegistry );
     }
-
-    @Override
-    protected ActionHandlerRegistry getHandlerRegistry() {
-        return handlerRegistry;
-    }
-
 }
