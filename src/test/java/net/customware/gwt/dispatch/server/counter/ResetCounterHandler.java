@@ -26,7 +26,7 @@ public class ResetCounterHandler implements ActionHandler<ResetCounter, ResetCou
 
     public void rollback( ResetCounter action, ResetCounterResult result, ExecutionContext context )
             throws ActionException {
-        counter.setValue( result.getOld() );
+        counter.setValue( result.getOldValue() );
     }
 
 }
