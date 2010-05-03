@@ -1,13 +1,13 @@
 package net.customware.gwt.dispatch.client.standard;
 
-import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import net.customware.gwt.dispatch.client.DispatchAsync;
 import net.customware.gwt.dispatch.server.Dispatch;
 import net.customware.gwt.dispatch.shared.Action;
-import net.customware.gwt.dispatch.shared.ActionException;
+import net.customware.gwt.dispatch.shared.DispatchException;
 import net.customware.gwt.dispatch.shared.Result;
-import net.customware.gwt.dispatch.shared.ServiceException;
+
+import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 /**
  * There currently seem to be GWT compilation problems with services that use
@@ -22,5 +22,5 @@ import net.customware.gwt.dispatch.shared.ServiceException;
  */
 @RemoteServiceRelativePath("dispatch")
 public interface StandardDispatchService extends RemoteService {
-    Result execute( Action<?> action ) throws ActionException, ServiceException;
+    Result execute( Action<?> action ) throws DispatchException;
 }

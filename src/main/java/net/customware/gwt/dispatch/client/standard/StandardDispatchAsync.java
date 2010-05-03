@@ -30,7 +30,6 @@ public class StandardDispatchAsync extends AbstractDispatchAsync {
                 StandardDispatchAsync.this.onFailure( action, caught, callback );
             }
 
-            @SuppressWarnings({"unchecked"})
             public void onSuccess( Result result ) {
                 StandardDispatchAsync.this.onSuccess( action, (R) result, callback );
             }

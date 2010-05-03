@@ -6,7 +6,9 @@ import net.customware.gwt.dispatch.shared.Action;
 import net.customware.gwt.dispatch.shared.ActionException;
 import net.customware.gwt.dispatch.shared.BatchAction;
 import net.customware.gwt.dispatch.shared.BatchResult;
+import net.customware.gwt.dispatch.shared.DispatchException;
 import net.customware.gwt.dispatch.shared.Result;
+import net.customware.gwt.dispatch.shared.ServiceException;
 import net.customware.gwt.dispatch.shared.BatchAction.OnException;
 
 /**
@@ -22,24 +24,25 @@ public class BatchActionHandler extends AbstractActionHandler<BatchAction, Batch
         super( BatchAction.class );
     }
 
-    public BatchResult execute( BatchAction action, ExecutionContext context ) throws ActionException {
+    public BatchResult execute( BatchAction action, ExecutionContext context ) throws DispatchException {
         OnException onException = action.getOnException();
         List<Result> results = new java.util.ArrayList<Result>();
-        List<Throwable> exceptions = new java.util.ArrayList<Throwable>();
+        List<DispatchException> exceptions = new java.util.ArrayList<DispatchException>();
         for ( Action<?> a : action.getActions() ) {
             Result result = null;
             try {
                 result = context.execute( a );
             } catch ( Exception e ) {
+                DispatchException de = null;
+                if ( e instanceof DispatchException )
+                    de = ( DispatchException ) e;
+                else
+                    de = new ServiceException( e );
+
                 if ( onException == OnException.ROLLBACK ) {
-                    if ( e instanceof ActionException )
-                        throw ( ActionException ) e;
-                    if ( e instanceof RuntimeException )
-                        throw ( RuntimeException ) e;
-                    else
-                        throw new ActionException( e );
+                    throw de;
                 } else {
-                    exceptions.set( results.size(), e );
+                    exceptions.set( results.size(), de );
                 }
             }
             results.add( result );

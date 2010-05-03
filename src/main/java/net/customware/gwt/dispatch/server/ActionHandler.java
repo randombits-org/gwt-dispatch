@@ -1,7 +1,7 @@
 package net.customware.gwt.dispatch.server;
 
 import net.customware.gwt.dispatch.shared.Action;
-import net.customware.gwt.dispatch.shared.ActionException;
+import net.customware.gwt.dispatch.shared.DispatchException;
 import net.customware.gwt.dispatch.shared.Result;
 
 /**
@@ -25,12 +25,10 @@ public interface ActionHandler<A extends Action<R>, R extends Result> {
      * @param action
      *            The action.
      * @return The {@link Result}.
-     * @throws ActionException
+     * @throws DispatchException
      *             if there is a problem performing the specified action.
-     * @throws ServiceException
-     *             if there is a low-level problem.
      */
-    R execute( A action, ExecutionContext context ) throws ActionException;
+    R execute( A action, ExecutionContext context ) throws DispatchException;
 
     /**
      * Attempts to roll back the specified action.
@@ -41,8 +39,7 @@ public interface ActionHandler<A extends Action<R>, R extends Result> {
      *            The result of the action.
      * @param context
      *            The execution context.
-     * @throws ServiceException
-     * @throws ActionException
+     * @throws DispatchException
      */
-    void rollback( A action, R result, ExecutionContext context ) throws ActionException;
+    void rollback( A action, R result, ExecutionContext context ) throws DispatchException;
 }

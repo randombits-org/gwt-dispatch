@@ -37,7 +37,6 @@ public class SecureDispatchAsync extends AbstractDispatchAsync {
                 SecureDispatchAsync.this.onFailure( action, caught, callback );
             }
 
-            @SuppressWarnings({"unchecked"})
             public void onSuccess( Result result ) {
                 // Note: This cast is a dodgy hack to get around a GWT 1.6 async compiler issue
                 SecureDispatchAsync.this.onSuccess( action, (R) result, callback );
@@ -45,6 +44,7 @@ public class SecureDispatchAsync extends AbstractDispatchAsync {
         } );
     }
 
+    @Override
     protected <A extends Action<R>, R extends Result> void onFailure( A action, Throwable caught, final AsyncCallback<R> callback ) {
         if ( caught instanceof InvalidSessionException ) {
             secureSessionAccessor.clearSessionId();
