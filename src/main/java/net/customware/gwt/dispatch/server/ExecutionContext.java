@@ -2,6 +2,7 @@ package net.customware.gwt.dispatch.server;
 
 import net.customware.gwt.dispatch.shared.Action;
 import net.customware.gwt.dispatch.shared.ActionException;
+import net.customware.gwt.dispatch.shared.DispatchException;
 import net.customware.gwt.dispatch.shared.Result;
 
 /**
@@ -14,8 +15,8 @@ import net.customware.gwt.dispatch.shared.Result;
 public interface ExecutionContext {
     /**
      * Executes an action in the current context. If
-     * <code>rollbackOnException</code> is set to <code>true</code>, the
-     * action will be rolled back if the surrounding execution fails.
+     * <code>rollbackOnException</code> is set to <code>true</code>, the action
+     * will be rolled back if the surrounding execution fails.
      * 
      * @param <A>
      *            The action type.
@@ -25,13 +26,12 @@ public interface ExecutionContext {
      * @param action
      *            The action.
      * @param allowRollback
-     *            If <code>true</code>, any failure in the surrounding
-     *            execution will trigger a rollback of the action.
+     *            If <code>true</code>, any failure in the surrounding execution
+     *            will trigger a rollback of the action.
      * @return The result.
-     * @throws ServiceException
-     * @throws ActionException
+     * @throws DispatchException
      */
-    <A extends Action<R>, R extends Result> R execute( A action, boolean allowRollback ) throws ActionException;
+    <A extends Action<R>, R extends Result> R execute( A action, boolean allowRollback ) throws DispatchException;
 
     /**
      * Executes an action in the current context. If the surrounding execution
@@ -44,8 +44,7 @@ public interface ExecutionContext {
      * @param action
      *            The action.
      * @return The result.
-     * @throws ServiceException
-     * @throws ActionException
+     * @throws DispatchException
      */
-    <A extends Action<R>, R extends Result> R execute( A action ) throws ActionException;
+    <A extends Action<R>, R extends Result> R execute( A action ) throws DispatchException;
 }

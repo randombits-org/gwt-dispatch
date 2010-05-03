@@ -11,7 +11,7 @@ import net.customware.gwt.dispatch.server.counter.Counter;
 import net.customware.gwt.dispatch.server.counter.IncrementCounterHandler;
 import net.customware.gwt.dispatch.server.counter.ResetCounterHandler;
 import net.customware.gwt.dispatch.shared.Action;
-import net.customware.gwt.dispatch.shared.ActionException;
+import net.customware.gwt.dispatch.shared.DispatchException;
 import net.customware.gwt.dispatch.shared.Result;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -34,7 +34,7 @@ public class StandardDispatcherTestService extends RemoteServiceServlet implemen
         dispatch = new SimpleDispatch( registry );
     }
 
-    public Result execute( Action<?> action ) throws ActionException {
+    public Result execute( Action<?> action ) throws DispatchException {
         try {
             return dispatch.execute( action );
         } catch ( RuntimeException e ) {
