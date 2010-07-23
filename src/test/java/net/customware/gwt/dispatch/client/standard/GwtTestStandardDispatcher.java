@@ -1,9 +1,12 @@
 package net.customware.gwt.dispatch.client.standard;
 
 import net.customware.gwt.dispatch.client.ExceptionHandler;
+import net.customware.gwt.dispatch.shared.ActionException;
 import net.customware.gwt.dispatch.shared.BatchAction;
 import net.customware.gwt.dispatch.shared.BatchResult;
+import net.customware.gwt.dispatch.shared.DispatchException;
 import net.customware.gwt.dispatch.shared.BatchAction.OnException;
+import net.customware.gwt.dispatch.shared.counter.CauseError;
 import net.customware.gwt.dispatch.shared.counter.IncrementCounter;
 import net.customware.gwt.dispatch.shared.counter.IncrementCounterResult;
 import net.customware.gwt.dispatch.shared.counter.ResetCounter;
@@ -118,5 +121,52 @@ public class GwtTestStandardDispatcher extends GWTTestCase {
         // event is expected to take.
         delayTestFinish( TEST_DELAY );
     }
+    
+    /**
+     * Verifies that if there is more than one error within a {@linkplain BatchAction}, with an 
+     * {@linkplain OnException#CONTINUE continue} policy, all exceptions are returned.
+     */
+    public void testBatchActionRetrieveExceptions() {
+    	
+    	BatchAction action = new BatchAction(OnException.CONTINUE, new CauseError(), new CauseError());
+    	
+    	dispatch.execute(action, new TestCallback<BatchResult>() {
+			public void onSuccess(BatchResult result) {
+				assertEquals(2, result.getExceptions().size());
+				
+				for ( DispatchException exception : result.getExceptions())
+					assertTrue( exception instanceof ActionException);
+				
+				finishTest();
+			}
+		});
+    	
+    	delayTestFinish( TEST_DELAY );
+    }
 
+    /**
+     * Verifies that if there are both successful and failed executions for a {@linkplain BatchAction} with
+     * an {@linkplain OnException#CONTINUE} policy, results and exceptions are returned as expected.
+     */
+    public void testBatchActionExceptionAndResult() {
+    	
+    	BatchAction action = new BatchAction(OnException.CONTINUE, new CauseError(), new IncrementCounter(1));
+    	
+    	dispatch.execute(action, new TestCallback<BatchResult>() {
+    		public void onSuccess(BatchResult result) {
+    			assertEquals(2, result.getExceptions().size());
+    			assertTrue(result.getException(0) instanceof ActionException);
+    			assertNull(result.getException(1)); // second action succeeds
+
+    			assertNull(result.getResult(0));
+    			assertNotNull(result.getResult(1));
+    			
+    			finishTest();
+
+    		}
+    	});
+    	
+    	delayTestFinish( TEST_DELAY );
+    }
+    
 }
