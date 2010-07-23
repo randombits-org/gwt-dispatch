@@ -7,6 +7,7 @@ import net.customware.gwt.dispatch.server.DefaultActionHandlerRegistry;
 import net.customware.gwt.dispatch.server.Dispatch;
 import net.customware.gwt.dispatch.server.InstanceActionHandlerRegistry;
 import net.customware.gwt.dispatch.server.SimpleDispatch;
+import net.customware.gwt.dispatch.server.counter.CauseErrorHandler;
 import net.customware.gwt.dispatch.server.counter.Counter;
 import net.customware.gwt.dispatch.server.counter.IncrementCounterHandler;
 import net.customware.gwt.dispatch.server.counter.ResetCounterHandler;
@@ -30,6 +31,7 @@ public class StandardDispatcherTestService extends RemoteServiceServlet implemen
         InstanceActionHandlerRegistry registry = new DefaultActionHandlerRegistry();
         registry.addHandler( new IncrementCounterHandler( counter ) );
         registry.addHandler( new ResetCounterHandler( counter ) );
+        registry.addHandler( new CauseErrorHandler() );
         registry.addHandler( new BatchActionHandler() );
         dispatch = new SimpleDispatch( registry );
     }

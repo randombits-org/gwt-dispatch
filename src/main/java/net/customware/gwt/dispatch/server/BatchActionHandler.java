@@ -32,6 +32,7 @@ public class BatchActionHandler extends AbstractActionHandler<BatchAction, Batch
             Result result = null;
             try {
                 result = context.execute( a );
+                exceptions.add(null);
             } catch ( Exception e ) {
                 DispatchException de = null;
                 if ( e instanceof DispatchException )
@@ -42,7 +43,7 @@ public class BatchActionHandler extends AbstractActionHandler<BatchAction, Batch
                 if ( onException == OnException.ROLLBACK ) {
                     throw de;
                 } else {
-                    exceptions.set( results.size(), de );
+                    exceptions.add( de );
                 }
             }
             results.add( result );
