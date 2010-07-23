@@ -2,7 +2,7 @@ package net.customware.gwt.dispatch.shared;
 
 import net.customware.gwt.dispatch.server.Dispatch;
 
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  * An action represents a command sent to the {@link Dispatch}. It has a
@@ -12,5 +12,5 @@ import java.io.Serializable;
  * @param <R>
  * The {@link Result} type.
  */
-public interface Action<R extends Result> extends Serializable {
+public interface Action<R extends Result> extends IsSerializable {
 }
