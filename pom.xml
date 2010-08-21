@@ -170,7 +170,7 @@
 				<artifactId>gwt-maven-plugin</artifactId>
 				<version>1.2</version>
 				<configuration>
-					<extraJvmArgs>-Xmx512m</extraJvmArgs>
+					<extraJvmArgs>-d32 -Xmx512m</extraJvmArgs>
 				</configuration>
 				<executions>
 					<execution>
