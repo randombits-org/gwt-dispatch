@@ -251,7 +251,7 @@
 				</os>
 			</activation>
 			<properties>
-				<gwt.extraJvmArgs>-Xmx512m<</gwt.extraJvmArgs>
+				<gwt.extraJvmArgs>-Xmx512m</gwt.extraJvmArgs>
 			</properties>
 		</profile>
 	</profiles>
