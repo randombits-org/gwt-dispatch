@@ -43,6 +43,7 @@
 		<gin.version>1.0</gin.version>
 		<appengine.version>1.2.1</appengine.version>
 		<spring.version>2.5.6</spring.version>
+		<gwt.extraJvmArgs>-Xmx512m -d32</gwt.extraJvmArgs>
 	</properties>
 
 	<dependencies>
@@ -169,9 +170,6 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>gwt-maven-plugin</artifactId>
 				<version>1.2</version>
-				<configuration>
-					<extraJvmArgs>-d32 -Xmx512m</extraJvmArgs>
-				</configuration>
 				<executions>
 					<execution>
 						<goals>
@@ -240,14 +238,13 @@
 			</activation>
 			<properties>
 				<gwt.variant>mac</gwt.variant>
-				<gwt.extraJvmArgs>-d32</gwt.extraJvmArgs>
 			</properties>
 		</profile>
 		<profile>
-			<id>win</id>
+			<id>windows</id>
 			<activation>
 				<os>
-					<family>windows</family>
+					<family>Windows</family>
 				</os>
 			</activation>
 			<properties>
