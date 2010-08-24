@@ -243,5 +243,16 @@
 				<gwt.extraJvmArgs>-d32</gwt.extraJvmArgs>
 			</properties>
 		</profile>
+		<profile>
+			<id>win</id>
+			<activation>
+				<os>
+					<family>windows</family>
+				</os>
+			</activation>
+			<properties>
+				<gwt.extraJvmArgs>-Xmx512m<</gwt.extraJvmArgs>
+			</properties>
+		</profile>
 	</profiles>
 </project>
