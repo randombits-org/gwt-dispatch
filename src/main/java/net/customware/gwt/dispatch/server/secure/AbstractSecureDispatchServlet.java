@@ -14,8 +14,17 @@ public abstract class AbstractSecureDispatchServlet extends RemoteServiceServlet
 
     public Result execute( String sessionId, Action<?> action ) throws DispatchException {
         try {
-            if ( getSessionValidator().isValid( sessionId, getThreadLocalRequest() ) ) {
-                return getDispatch().execute( action );
+            
+            SecureSessionValidator sessionValidator = getSessionValidator();
+            if ( sessionValidator == null )
+                throw new ServiceException("No session validator found for servlet '" + getServletName() + "' . Please verify your server-side configuration.");
+            
+            Dispatch dispatch = getDispatch();
+            if ( dispatch == null )
+                throw new ServiceException("No dispatch found for servlet '" + getServletName() + "' . Please verify your server-side configuration.");
+            
+            if ( sessionValidator.isValid( sessionId, getThreadLocalRequest() ) ) {
+                return dispatch.execute( action );
             } else {
                 throw new InvalidSessionException();
             }
