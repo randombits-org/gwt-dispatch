@@ -14,7 +14,12 @@ public abstract class AbstractStandardDispatchServlet extends RemoteServiceServl
 
     public Result execute( Action<?> action ) throws DispatchException {
         try {
-            return getDispatch().execute( action );
+            Dispatch dispatch = getDispatch();
+            
+            if ( dispatch == null )
+                throw new ServiceException("No dispatch found for servlet '" + getServletName() + "' . Please verify your server-side configuration.");
+            
+            return dispatch.execute( action );
         } catch ( RuntimeException e ) {
             log( "Exception while executing " + action.getClass().getName() + ": " + e.getMessage(), e );
             throw new ServiceException( e );
