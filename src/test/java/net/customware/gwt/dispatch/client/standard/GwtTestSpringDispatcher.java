@@ -4,10 +4,6 @@ import net.customware.gwt.dispatch.client.ExceptionHandler;
 import net.customware.gwt.dispatch.shared.counter.IncrementCounter;
 import net.customware.gwt.dispatch.shared.counter.IncrementCounterResult;
 
-import com.google.gwt.http.client.Request;
-import com.google.gwt.http.client.RequestBuilder;
-import com.google.gwt.http.client.RequestCallback;
-import com.google.gwt.http.client.Response;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -36,22 +32,6 @@ public class GwtTestSpringDispatcher extends GWTTestCase {
                 throw new RuntimeException( e );
             }
         } );
-        
-        // start spring servlet
-        RequestBuilder builder = new RequestBuilder(RequestBuilder.HEAD, "http://localhost:8080/spring");
-        builder.setCallback(new RequestCallback() {
-            
-            public void onResponseReceived(Request request, Response response) {
-        
-                System.out.println("Received response with status " + response.getStatusCode());
-            }
-            
-            public void onError(Request request, Throwable exception) {
-        
-                System.out.println("Received error " + exception.getMessage());
-            }
-        });
-        builder.send();
 
         super.gwtSetUp();
     }
