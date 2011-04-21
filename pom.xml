@@ -38,12 +38,12 @@
 	</licenses>
 
 	<properties>
-		<gwt.version>1.7.1</gwt.version>
+		<gwt.version>2.0.4</gwt.version>
 		<guice.version>2.0</guice.version>
 		<gin.version>1.0</gin.version>
 		<appengine.version>1.2.1</appengine.version>
 		<spring.version>2.5.6</spring.version>
-		<gwt.extraJvmArgs>-Xmx512m -d32</gwt.extraJvmArgs>
+		<gwt.extraJvmArgs>-Xmx512m</gwt.extraJvmArgs>
 	</properties>
 
 	<dependencies>
