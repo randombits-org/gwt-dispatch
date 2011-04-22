@@ -3,27 +3,18 @@ package net.customware.gwt.dispatch.client.standard;
 import net.customware.gwt.dispatch.client.ExceptionHandler;
 import net.customware.gwt.dispatch.shared.ActionException;
 import net.customware.gwt.dispatch.shared.BatchAction;
+import net.customware.gwt.dispatch.shared.BatchAction.OnException;
 import net.customware.gwt.dispatch.shared.BatchResult;
 import net.customware.gwt.dispatch.shared.DispatchException;
-import net.customware.gwt.dispatch.shared.BatchAction.OnException;
 import net.customware.gwt.dispatch.shared.counter.CauseError;
 import net.customware.gwt.dispatch.shared.counter.IncrementCounter;
 import net.customware.gwt.dispatch.shared.counter.IncrementCounterResult;
 import net.customware.gwt.dispatch.shared.counter.ResetCounter;
 import net.customware.gwt.dispatch.shared.counter.ResetCounterResult;
 
-import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class GwtTestStandardDispatcher extends GWTTestCase {
-
-    private abstract static class TestCallback<T> implements AsyncCallback<T> {
-        public void onFailure( Throwable e ) {
-            throw new RuntimeException( e );
-        }
-    }
-
-    private static final int TEST_DELAY = 500;
+public class GwtTestStandardDispatcher extends AbstractGwtTestCase {
 
     private StandardDispatchAsync dispatch;
 

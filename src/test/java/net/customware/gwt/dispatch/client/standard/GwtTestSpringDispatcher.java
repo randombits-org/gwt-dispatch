@@ -4,18 +4,7 @@ import net.customware.gwt.dispatch.client.ExceptionHandler;
 import net.customware.gwt.dispatch.shared.counter.IncrementCounter;
 import net.customware.gwt.dispatch.shared.counter.IncrementCounterResult;
 
-import com.google.gwt.junit.client.GWTTestCase;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-
-public class GwtTestSpringDispatcher extends GWTTestCase {
-
-    private abstract static class TestCallback<T> implements AsyncCallback<T> {
-        public void onFailure( Throwable e ) {
-            throw new RuntimeException( e );
-        }
-    }
-
-    private static final int TEST_DELAY = 500;
+public class GwtTestSpringDispatcher extends AbstractGwtTestCase {
 
     private StandardDispatchAsync dispatch;
 
