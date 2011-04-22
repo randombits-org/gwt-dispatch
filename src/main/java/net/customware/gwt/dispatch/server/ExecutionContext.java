@@ -1,7 +1,6 @@
 package net.customware.gwt.dispatch.server;
 
 import net.customware.gwt.dispatch.shared.Action;
-import net.customware.gwt.dispatch.shared.ActionException;
 import net.customware.gwt.dispatch.shared.DispatchException;
 import net.customware.gwt.dispatch.shared.Result;
 
