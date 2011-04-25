@@ -1,0 +1,9 @@
+# Ignore Eclipse project files
+syntax: glob
+.classpath
+.project
+.settings/*
+target
+
+syntax: regexp
+^tomcat$
