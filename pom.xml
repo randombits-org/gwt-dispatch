@@ -19,6 +19,10 @@
 		<url>http://www.customware.net/</url>
 	</organization>
 
+	<ciManagement>
+		<system>TeamCity</system>
+		<url>http://teamcity.codebetter.com/project.html?projectId=project93&amp;tab=projectOverview</url>
+	</ciManagement>
 	<developers>
 		<developer>
 			<name>David Peterson</name>
