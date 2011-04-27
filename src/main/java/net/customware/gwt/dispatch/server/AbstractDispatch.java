@@ -64,7 +64,24 @@ public abstract class AbstractDispatch implements Dispatch {
     private <A extends Action<R>, R extends Result> R doExecute( A action, ExecutionContext ctx )
             throws DispatchException {
         ActionHandler<A, R> handler = findHandler( action );
-        return handler.execute( action, ctx );
+        
+        executing(action, handler, ctx);
+        
+        try {
+            R result  = handler.execute( action, ctx );
+            executed(action, result, handler, ctx);
+            return result;
+        } catch ( DispatchException e) {
+            failed(action, e, handler, ctx);
+            throw e;
+        } catch ( RuntimeException e) {
+            failed(action, e, handler, ctx);
+            throw e;
+        } catch ( Error e) {
+            failed(action, e, handler, ctx);
+            throw e;
+        }
+        
     }
 
     private <A extends Action<R>, R extends Result> ActionHandler<A, R> findHandler( A action )
@@ -77,6 +94,53 @@ public abstract class AbstractDispatch implements Dispatch {
     }
 
     protected abstract ActionHandlerRegistry getHandlerRegistry();
+    
+    /**
+     * Method invoked before executing the specified action with the specified handler.
+     * 
+     * <p>This method must not throw any exceptions.</p>
+     * 
+     * @param <A> the action type
+     * @param <R> the result type
+     * @param action the action to execute
+     * @param handler the handler to execute it with
+     * @param ctx the execution context
+     */
+    protected <A extends Action<R>, R extends Result> void executing(A action, ActionHandler<A,R > handler, ExecutionContext ctx) {
+        
+    }
+
+    /**
+     * Method invoked after the specified action has been succesfully executed with the specified handler.
+     * 
+     * <p>This method must not throw any exceptions.</p>
+     * 
+     * @param <A> the action type
+     * @param <R> the result type
+     * @param action the action to execute
+     * @param result the execution result
+     * @param handler the handler to execute it with
+     * @param ctx the execution context
+     */
+    protected <A extends Action<R>, R extends Result> void executed(A action, R result, ActionHandler<A,R> handler, ExecutionContext ctx) {
+        
+    }
+    
+    /**
+     * Method invoked after the specified action has been unsuccesfully executed with the specified handler.
+     * 
+     * <p>This method must not throw any exceptions.</p>
+     * 
+     * @param <A> the action type
+     * @param <R> the result type
+     * @param action the action to execute
+     * @param e the exception thrown by the handler
+     * @param handler the handler to execute it with
+     * @param ctx the execution context
+     */    
+    protected <A extends Action<R>, R extends Result> void failed(A action, Throwable e, ActionHandler<A,R> handler, ExecutionContext ctx) {
+        
+    }
 
     private <A extends Action<R>, R extends Result> void doRollback( A action, R result, ExecutionContext ctx )
             throws DispatchException {
