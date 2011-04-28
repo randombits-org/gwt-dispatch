@@ -8,6 +8,17 @@ import net.customware.gwt.dispatch.shared.DispatchException;
 import net.customware.gwt.dispatch.shared.Result;
 import net.customware.gwt.dispatch.shared.UnsupportedActionException;
 
+/**
+ * Abstract base implementation of the {@link Dispatch}
+ * 
+ * <p>Provides basic action handler lookup and execution support. Lifecycle methods
+ * may be overriden by implementors to receive notifications regarding action
+ * execution and execution results.</p>
+ * 
+ * @author David Peterson
+ * @author Robert Munteanu
+ *
+ */
 public abstract class AbstractDispatch implements Dispatch {
 
     private static class DefaultExecutionContext implements ExecutionContext {
@@ -65,9 +76,8 @@ public abstract class AbstractDispatch implements Dispatch {
             throws DispatchException {
         ActionHandler<A, R> handler = findHandler( action );
         
-        executing(action, handler, ctx);
-        
         try {
+            executing(action, handler, ctx);
             R result  = handler.execute( action, ctx );
             executed(action, result, handler, ctx);
             return result;
@@ -98,15 +108,17 @@ public abstract class AbstractDispatch implements Dispatch {
     /**
      * Method invoked before executing the specified action with the specified handler.
      * 
-     * <p>This method must not throw any exceptions.</p>
+     * <p>Any exception thrown from this method will prevent the normal execution of the action
+     * and will be propagated.</p>
      * 
      * @param <A> the action type
      * @param <R> the result type
      * @param action the action to execute
      * @param handler the handler to execute it with
      * @param ctx the execution context
+     * @throws DispatchException if the action execution should be cancelled 
      */
-    protected <A extends Action<R>, R extends Result> void executing(A action, ActionHandler<A,R > handler, ExecutionContext ctx) {
+    protected <A extends Action<R>, R extends Result> void executing(A action, ActionHandler<A,R > handler, ExecutionContext ctx) throws DispatchException {
         
     }
 
@@ -134,7 +146,7 @@ public abstract class AbstractDispatch implements Dispatch {
      * @param <A> the action type
      * @param <R> the result type
      * @param action the action to execute
-     * @param e the exception thrown by the handler
+     * @param e the exception thrown by the handler or by the {@link #executing(Action, ActionHandler, ExecutionContext) executing method}
      * @param handler the handler to execute it with
      * @param ctx the execution context
      */    
