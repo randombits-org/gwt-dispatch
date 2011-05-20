@@ -36,7 +36,7 @@ public class StandardDispatcherTestService extends RemoteServiceServlet implemen
         dispatch = new SimpleDispatch( registry );
     }
 
-    public Result execute( Action<?> action ) throws DispatchException {
+    public <R extends Result> R execute( Action<R> action ) throws DispatchException {
         try {
             return dispatch.execute( action );
         } catch ( RuntimeException e ) {

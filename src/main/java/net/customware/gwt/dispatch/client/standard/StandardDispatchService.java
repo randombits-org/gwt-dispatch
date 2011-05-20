@@ -22,5 +22,5 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  */
 @RemoteServiceRelativePath("dispatch")
 public interface StandardDispatchService extends RemoteService {
-    Result execute( Action<?> action ) throws DispatchException;
+    <R extends Result> R execute( Action<R> action ) throws DispatchException;
 }

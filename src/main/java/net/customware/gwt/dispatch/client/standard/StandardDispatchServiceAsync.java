@@ -15,5 +15,5 @@ public interface StandardDispatchServiceAsync {
      * 
      * @see net.customware.gwt.dispatch.server.Dispatch
      */
-    void execute( Action<?> action, AsyncCallback<Result> callback );
+    <R extends Result> void execute( Action<R> action, AsyncCallback<R> callback );
 }

@@ -25,13 +25,13 @@ public class StandardDispatchAsync extends AbstractDispatchAsync {
     }
 
     public <A extends Action<R>, R extends Result> void execute( final A action, final AsyncCallback<R> callback ) {
-        realService.execute( action, new AsyncCallback<Result>() {
+        realService.execute( action, new AsyncCallback<R>() {
             public void onFailure( Throwable caught ) {
                 StandardDispatchAsync.this.onFailure( action, caught, callback );
             }
 
-            public void onSuccess( Result result ) {
-                StandardDispatchAsync.this.onSuccess( action, (R) result, callback );
+            public void onSuccess( R result ) {
+                StandardDispatchAsync.this.onSuccess( action, result, callback );
             }
         } );
     }
