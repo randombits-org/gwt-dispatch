@@ -32,14 +32,13 @@ public class SecureDispatchAsync extends AbstractDispatchAsync {
 
         String sessionId = secureSessionAccessor.getSessionId();
 
-        realService.execute( sessionId, action, new AsyncCallback<Result>() {
+        realService.execute( sessionId, action, new AsyncCallback<R>() {
             public void onFailure( Throwable caught ) {
                 SecureDispatchAsync.this.onFailure( action, caught, callback );
             }
 
-            public void onSuccess( Result result ) {
-                // Note: This cast is a dodgy hack to get around a GWT 1.6 async compiler issue
-                SecureDispatchAsync.this.onSuccess( action, (R) result, callback );
+            public void onSuccess( R result ) {
+                SecureDispatchAsync.this.onSuccess( action, result, callback );
             }
         } );
     }

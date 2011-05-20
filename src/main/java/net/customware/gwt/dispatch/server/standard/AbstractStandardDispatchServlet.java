@@ -12,7 +12,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public abstract class AbstractStandardDispatchServlet extends RemoteServiceServlet implements
         StandardDispatchService {
 
-    public Result execute( Action<?> action ) throws DispatchException {
+    public <R extends Result> R execute( Action<R> action ) throws DispatchException {
         try {
             Dispatch dispatch = getDispatch();
             

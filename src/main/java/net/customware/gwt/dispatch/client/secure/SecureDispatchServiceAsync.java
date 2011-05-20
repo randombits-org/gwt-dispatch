@@ -6,5 +6,5 @@ import net.customware.gwt.dispatch.shared.Action;
 import net.customware.gwt.dispatch.shared.Result;
 
 public interface SecureDispatchServiceAsync {
-    void execute( String sessionId, Action<?> action, AsyncCallback<Result> callback );
+    <R extends Result> void execute( String sessionId, Action<R> action, AsyncCallback<R> callback );
 }
