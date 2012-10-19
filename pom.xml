@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
 		<artifactId>oss-parent</artifactId>
 		<groupId>org.sonatype.oss</groupId>
@@ -7,7 +8,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.customware.gwt.dispatch</groupId>
 	<artifactId>gwt-dispatch</artifactId>
-	<packaging>jar</packaging>
+	<packaging>bundle</packaging>
 	<version>1.2.1-SNAPSHOT</version>
 	<name>GWT Dispatch</name>
 	<url>http://code.google.com/p/gwt-dispatch</url>
@@ -183,6 +184,31 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.3.7</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-Name>${project.name}</Bundle-Name>
+						<Export-Package>
+							net.customware.gwt.dispatch.server.*,
+							net.customware.gwt.dispatch.shared.*,
+							net.customware.gwt.dispatch.client,
+							net.customware.gwt.dispatch.client.secure,
+							net.customware.gwt.dispatch.client.standard
+						</Export-Package>
+						<Import-Package>
+							!com.google.gwt.inject.client.*,
+							com.google.appengine.*;resolution:=optional,
+							com.google.inject.*;resolution:=optional,
+							org.springframework.*;resolution:=optional,
+							*
+						</Import-Package>
+					</instructions>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
