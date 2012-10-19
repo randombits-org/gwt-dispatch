@@ -25,7 +25,7 @@ import javax.servlet.ServletResponse;
  * gwt-dispatch this class loader should be able to load classes from the
  * gwt-servlet, gwt-dispatch and the web application bundles. This can be
  * achieved by using the <code>MultiClassLoader</code> class.
- * <p>
+ * </p>
  * <p>
  * Refs:
  * <ul>
