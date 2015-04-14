@@ -9,7 +9,7 @@
 	<groupId>net.customware.gwt.dispatch</groupId>
 	<artifactId>gwt-dispatch</artifactId>
 	<packaging>bundle</packaging>
-	<version>1.2.1-SNAPSHOT</version>
+	<version>1.2.2-SNAPSHOT</version>
 	<name>GWT Dispatch</name>
 	<url>http://code.google.com/p/gwt-dispatch</url>
 
@@ -48,7 +48,7 @@
 	</licenses>
 
 	<properties>
-		<gwt.version>2.0.4</gwt.version>
+		<gwt.version>2.7.0</gwt.version>
 		<guice.version>2.0</guice.version>
 		<gin.version>1.0</gin.version>
 		<appengine.version>1.2.1</appengine.version>
@@ -168,8 +168,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.0</version>
 				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -213,7 +213,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>gwt-maven-plugin</artifactId>
-				<version>1.2</version>
+				<version>2.7.0</version>
 				<executions>
 					<execution>
 						<goals>
