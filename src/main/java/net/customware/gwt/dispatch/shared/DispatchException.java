@@ -1,5 +1,6 @@
 package net.customware.gwt.dispatch.shared;
 
+import com.google.gwt.core.shared.SerializableThrowable;
 import java.io.Serializable;
 
 /**
@@ -27,6 +28,11 @@ public abstract class DispatchException extends Exception implements Serializabl
     public DispatchException( String message, Throwable cause ) {
         super( message + " (" + cause.getMessage() + ")" );
         this.causeClassname = cause.getClass().getName();
+    }
+
+    public DispatchException( SerializableThrowable serializableThrowable ) {
+        super(serializableThrowable);
+        causeClassname = serializableThrowable.getClass().getName();
     }
 
     public String getCauseClassname() {
