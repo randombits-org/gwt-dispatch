@@ -41,15 +41,21 @@ public class GwtTestStandardDispatcher extends AbstractGwtTestCase {
 
         super.gwtTearDown();
     }
-    
+
     public void testIncrementCounter() {
-        
-        dispatch.execute( new IncrementCounter( 1 ), new TestCallback<IncrementCounterResult>() {
-            public void onSuccess( IncrementCounterResult result ) {
-                assertEquals( 1, result.getCurrent() );
-                finishTest();
+
+        dispatch.execute( new ResetCounter(), new TestCallback<ResetCounterResult>() {
+
+            @Override
+            public void onSuccess( ResetCounterResult result ) {
+                dispatch.execute( new IncrementCounter( 1 ), new TestCallback<IncrementCounterResult>() {
+                    public void onSuccess( IncrementCounterResult innerResult ) {
+                        assertEquals( 1, innerResult.getCurrent() );
+                        finishTest();
+                    }
+                } );
             }
-        } );
+        });
         
         // Set a delay period significantly longer than the
         // event is expected to take.
