@@ -52,7 +52,7 @@
 		<guice.version>2.0</guice.version>
 		<gin.version>1.0</gin.version>
 		<appengine.version>1.2.1</appengine.version>
-		<spring.version>2.5.6</spring.version>
+		<spring.version>5.3.18</spring.version>
 		<gwt.extraJvmArgs>-Xmx512m</gwt.extraJvmArgs>
 	</properties>
 
